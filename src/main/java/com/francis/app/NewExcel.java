@@ -1,8 +1,9 @@
 package com.francis.app;
 
-import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -38,8 +39,8 @@ public class NewExcel implements Runnable {
         int iLeft = (int) (calculator.lengthL / 1000);
         int iRight = (int) ((calculator.length - calculator.lengthL) / 1000);
 
-        HSSFWorkbook wb = new HSSFWorkbook();
-        HSSFSheet ws = wb.createSheet("计算结果");
+        SXSSFWorkbook wb = new SXSSFWorkbook();
+        Sheet ws = wb.createSheet("计算结果");
 
         Row titleRow = ws.createRow(0);
         String[] titleName = { "序号", "与左侧支撑距离", "高度" };
@@ -67,7 +68,7 @@ public class NewExcel implements Runnable {
         }
         FileOutputStream fileOut = null;
         try {
-            fileOut = new FileOutputStream("计算结果.xls");
+            fileOut = new FileOutputStream("计算结果.xlsx");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
